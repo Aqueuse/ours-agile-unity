@@ -5,6 +5,10 @@ public class OursController : MonoBehaviour {
     public Transform cameraPivot;
     public Transform camera;
 
+    public GameObject firstPersonCamera;
+    public GameObject thirdPersonCamera;
+    public GameObject topCamera;
+
     private float heading;
 
     private Vector2 input;
@@ -21,10 +25,16 @@ public class OursController : MonoBehaviour {
 
     private Rigidbody _oursRigidbody;
 
+    List<GameObject> cameraModes = new List<GameObject>();
+
     private void Start() {
         print("hello robours");
         _oursAnimator = GetComponent<Animator>();
         _oursRigidbody = GetComponent<Rigidbody>();
+
+        cameraModes.Add(firstPersonCamera);
+        cameraModes.Add(thirdPersonCamera);
+        cameraModes.Add(topCamera);
     }
 
     private void Update() {
@@ -33,12 +43,11 @@ public class OursController : MonoBehaviour {
         }
 
 
-
         // switch cam 
-        List<GameObject> cameraModes = new List<GameObject>();
-        //cameraModes.Add();
+        if (Input.GetMouseButtonDown(2)) {
+            print("switch cam");
+        }
 
-        
 
         heading += Input.GetAxis("Mouse X")*Time.deltaTime*180;
         cameraPivot.rotation = Quaternion.Euler(0, heading, 0);
